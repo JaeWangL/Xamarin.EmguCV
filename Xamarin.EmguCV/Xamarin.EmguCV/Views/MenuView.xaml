@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Xamarin.EmguCV.Behaviors;assembly=Xamarin.EmguCV"
+             xmlns:templates="clr-namespace:Xamarin.EmguCV.Views.Templates;assembly=Xamarin.EmguCV"
+             x:Class="Xamarin.EmguCV.Views.MenuView"
+             BackgroundColor="{StaticResource NavyColor}"
+             Title=" ">
+    <ContentPage.Content>
+        <Grid ColumnSpacing="0"
+              RowSpacing="0"
+              Margin="0, 24, 0, 0">
+            <ListView CachingStrategy="RecycleElement"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding MenuItems}" 
+                      behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding MenuItemSelectedCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <templates:MenuItemTemplate />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

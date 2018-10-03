@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin.EmguCV.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!-- COLORS -->
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="GrayColor">#4D4D4D</Color>
+            <Color x:Key="LightGrayColor">#F2F2F2</Color>
+            <Color x:Key="NavyColor">#2A3440</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+
+            <Color x:Key="AccentColor">#BC4C1B</Color>
+
+            <!-- FONT SIZES -->
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double"
+                        Default="12"
+                        iOS="11" />
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        Default="14"
+                        iOS="12" />
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        Default="16"
+                        iOS="14" />
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double"
+                        Default="18"
+                        iOS="16" />
+
+            <OnPlatform x:Key="LargerSize"
+                        x:TypeArguments="x:Double"
+                        Default="20"
+                        iOS="18" />
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double"
+                        Default="24"
+                        iOS="20" />
+
+            <OnPlatform x:Key="ExtraBigSize"
+                        x:TypeArguments="x:Double"
+                        Default="32"
+                        iOS="24" />
+
+            <OnPlatform x:Key="HugeSize"
+                        x:TypeArguments="x:Double"
+                        Default="48"
+                        iOS="32" />
+
+            <!-- NON-KEY STYLES -->
+            <Style TargetType="{x:Type ActivityIndicator}">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="200" />
+            </Style>
+            
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

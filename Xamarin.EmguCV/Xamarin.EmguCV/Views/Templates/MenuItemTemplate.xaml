@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="Xamarin.EmguCV.Views.Templates.MenuItemTemplate">
+    <ViewCell.View>
+        <Grid ColumnSpacing="0"
+              RowSpacing="0">
+            <Grid.Resources>
+                <ResourceDictionary>
+
+                    <Style x:Key="MenuTextStyle"
+                           TargetType="Label">
+                        <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                        <Setter Property="FontSize" Value="{StaticResource ExtraBigSize}" />
+                        <Setter Property="VerticalOptions" Value="Center" />
+                    </Style>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding IsEnabled, Mode=TwoWay}"
+                             Value="False">
+                    <Setter Property="Opacity"     
+                            Value="0.5" />
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <Label Text="{Binding Title}"
+                   Style="{StaticResource MenuTextStyle}" />
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

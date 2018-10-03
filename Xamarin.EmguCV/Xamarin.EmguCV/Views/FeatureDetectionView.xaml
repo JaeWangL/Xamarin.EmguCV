@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:Xamarin.EmguCV.Behaviors;assembly=Xamarin.EmguCV"
+             xmlns:controls="clr-namespace:Xamarin.EmguCV.Controls;assembly=Xamarin.EmguCV"
+             x:Class="Xamarin.EmguCV.Views.FeatureDetectionView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="AccentTabColor">#378D93</Color>
+
+            <Style x:Key="ImageStyle" 
+                   TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+
+            <Style x:Key="TabTextStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MediumSize}" />
+            </Style>
+
+            <Style x:Key="TabSeparatorStyle" 
+                   TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid ColumnSpacing="0"
+                  RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Main Grid-->
+                <Grid Grid.Column="0"
+                      Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Images -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:CustomFrame Grid.Column="0"
+                                              HasShadow="True">
+                            <Image Source="{Binding FileName}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+
+                        <controls:CustomFrame Grid.Column="1"
+                                              HasShadow="True">
+                            <Image Source="{Binding ResultImage}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+                    </Grid>
+
+                    <!-- KeyPoints -->
+                    <Grid Grid.Row="1">
+                        <ListView CachingStrategy="RecycleElement"
+                                  SeparatorVisibility="None"
+                                  HasUnevenRows="True"
+                                  ItemsSource="{Binding KeyPoints}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid ColumnSpacing="0"
+                                              RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding X}" />
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Y}" />
+                                            <Label Grid.Column="2"
+                                                   Text="{Binding Size}" />
+                                            <Label Grid.Column="3"
+                                                   Text="{Binding Angle}" />
+                                            <Label Grid.Column="4"
+                                                   Text="{Binding Response}" />
+                                            <Label Grid.Column="5"
+                                                   Text="{Binding Octave}" />
+                                            <Label Grid.Column="6"
+                                                   Text="{Binding ClassId}" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Text="Pick Image"
+                                Command="{Binding PickCommand}" />
+                        <Button Grid.Column="1"
+                                Text="Feature Detect"
+                                Command="{Binding DetectCommand}" />
+                    </Grid>
+                </Grid>
+
+                <!-- Parameters Grid-->
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource LightGrayColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="1" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <ListView CachingStrategy="RecycleElement"
+                                  SeparatorVisibility="None"
+                                  HasUnevenRows="True"
+                                  ItemsSource="{Binding Algorithms}" 
+                                  behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding AlgorithmSelectedCommand}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label Text="{Binding Name}" />
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          Style="{StaticResource TabSeparatorStyle}" />
+
+                    <Grid Grid.Row="2"
+                          IsVisible="{Binding IsKaze}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Text="Threshold" />
+                        <Entry Grid.Row="1"
+                               Text="{Binding K_threshold, Mode=TwoWay}" />
+                        <Label Grid.Row="2"
+                               Text="Octaves" />
+                        <Entry Grid.Row="3"
+                               Text="{Binding K_octaves, Mode=TwoWay}" />
+                        <Label Grid.Row="4"
+                               Text="Sub Level" />
+                        <Entry Grid.Row="5"
+                               Text="{Binding K_sublevel, Mode=TwoWay}" />
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          IsVisible="{Binding IsSift}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Text="Features" />
+                        <Entry Grid.Row="1"
+                               Text="{Binding I_features, Mode=TwoWay}" />
+                        <Label Grid.Row="2"
+                               Text="Octave Layers" />
+                        <Entry Grid.Row="3"
+                               Text="{Binding I_octaveLayers, Mode=TwoWay}" />
+                        <Label Grid.Row="4"
+                               Text="Contrast Threshold" />
+                        <Entry Grid.Row="5"
+                               Text="{Binding I_contrastThreshold, Mode=TwoWay}" />
+                        <Label Grid.Row="6"
+                               Text="Edge Threshold" />
+                        <Entry Grid.Row="7"
+                               Text="{Binding I_edgeThreshold, Mode=TwoWay}" />
+                        <Label Grid.Row="8"
+                               Text="Sigma" />
+                        <Entry Grid.Row="9"
+                               Text="{Binding I_sigma, Mode=TwoWay}" />
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          IsVisible="{Binding IsSurf}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="26" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Text="Hessian Thresh" />
+                        <Entry Grid.Row="1"
+                               Text="{Binding U_hessianThresh, Mode=TwoWay}" />
+                        <Label Grid.Row="2"
+                               Text="Octaves" />
+                        <Entry Grid.Row="3"
+                               Text="{Binding U_octaves, Mode=TwoWay}" />
+                        <Label Grid.Row="4"
+                               Text="Octave Layers" />
+                        <Entry Grid.Row="5"
+                               Text="{Binding U_octaveLayers, Mode=TwoWay}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator Color="{StaticResource AccentColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
