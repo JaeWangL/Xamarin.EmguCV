@@ -6,6 +6,8 @@ namespace Xamarin.EmguCV.Models.Algorithm
     {
         public byte[] ImageArray { get; set; }
 
-        public List<KeyPointModel> Datas { get; set; }
+        public List<CirclePointModel> CircleDatas { get; set; }
+
+        public List<KeyPointModel> KeyDatas { get; set; }
     }
 }

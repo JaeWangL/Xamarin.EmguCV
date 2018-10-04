@@ -41,6 +41,14 @@ namespace Xamarin.EmguCV.ViewModels
 
             MenuItems.Add(new MenuItemModel
             {
+                MenuItemType = MenuItemType.CornerHarris,
+                ViewModelType = typeof(CornerHarrisViewModel),
+                Title = "Corner Harris",
+                IsEnabled = true
+            });
+
+            MenuItems.Add(new MenuItemModel
+            {
                 MenuItemType = MenuItemType.FeatureDetection,
                 ViewModelType = typeof(FeatureDetectionViewModel),
                 Title = "Feature Detection",

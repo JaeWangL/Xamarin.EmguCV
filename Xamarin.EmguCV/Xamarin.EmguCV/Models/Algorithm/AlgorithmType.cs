@@ -4,13 +4,24 @@
     {
         KAZE,
         SIFT,
-        SURF,
+        SURF
     }
 
     public enum FeatureMatchType
     {
         Flann,
-        BruteForce,
+        BruteForce
+    }
+
+    public enum HarrisBorderType
+    {
+        Constant,
+        Replicate,
+        Reflect,
+        Wrap,
+        Reflect101,
+        Transparent,
+        Isolated
     }
 
     public enum KeypointType

@@ -7,20 +7,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Color x:Key="AccentTabColor">#378D93</Color>
-
             <Style x:Key="ImageStyle" 
                    TargetType="Image">
                 <Setter Property="Aspect" Value="AspectFill" />
             </Style>
 
-            <Style x:Key="TabTextStyle" 
-                   TargetType="Label">
-                <Setter Property="FontSize" 
-                        Value="{StaticResource MediumSize}" />
-            </Style>
-
-            <Style x:Key="TabSeparatorStyle" 
+            <Style x:Key="SeparatorStyle" 
                    TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource BlackColor}" />
                 <Setter Property="HeightRequest" Value="1" />
@@ -43,6 +35,7 @@
                       Margin="12">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="300" />
+                        <RowDefinition Height="24" />
                         <RowDefinition />
                         <RowDefinition Height="60" />
                     </Grid.RowDefinitions>
@@ -67,8 +60,37 @@
                         </controls:CustomFrame>
                     </Grid>
 
-                    <!-- KeyPoints -->
+                    <!-- Points's Header -->
+                    <!-- Now, ListView's Header and Footer is not working in WPF-->
                     <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Text="X" />
+                        <Label Grid.Column="1"
+                               Text="Y" />
+                        <Label Grid.Column="2"
+                               Text="Size" />
+                        <Label Grid.Column="3"
+                               Text="Angle" />
+                        <Label Grid.Column="4"
+                               Text="Response" />
+                        <Label Grid.Column="5"
+                               Text="Octave" />
+                        <Label Grid.Column="6"
+                               Text="ClassId" />
+                    </Grid>
+
+                    <!-- CirclePoints -->
+                    <Grid Grid.Row="2">
                         <ListView CachingStrategy="RecycleElement"
                                   SeparatorVisibility="None"
                                   HasUnevenRows="True"
@@ -110,7 +132,7 @@
                     </Grid>
 
                     <!-- Buttons -->
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -151,7 +173,7 @@
                     </Grid>
 
                     <Grid Grid.Row="1"
-                          Style="{StaticResource TabSeparatorStyle}" />
+                          Style="{StaticResource SeparatorStyle}" />
 
                     <Grid Grid.Row="2"
                           IsVisible="{Binding IsKaze}">

@@ -40,8 +40,8 @@ namespace Xamarin.EmguCV.Wpf.Services.Algorithm
                 GetKeypointDraw(kpsType));
 
             result.ImageArray = ImageHelper.SetImage(resultImage);
-            result.Datas = new List<KeyPointModel>();
-            result.Datas.AddRange(keyPoints.Select(k => new KeyPointModel()
+            result.KeyDatas = new List<KeyPointModel>();
+            result.KeyDatas.AddRange(keyPoints.Select(k => new KeyPointModel()
             {
                 X = k.Point.X,
                 Y = k.Point.Y,
@@ -51,6 +51,7 @@ namespace Xamarin.EmguCV.Wpf.Services.Algorithm
                 Octave = k.Octave,
                 ClassId = k.ClassId
             }));
+
             return result;
         }
 
@@ -78,8 +79,8 @@ namespace Xamarin.EmguCV.Wpf.Services.Algorithm
                 GetKeypointDraw(kpsType));
 
             result.ImageArray = ImageHelper.SetImage(resultImage);
-            result.Datas = new List<KeyPointModel>();
-            result.Datas.AddRange(keyPoints.Select(k => new KeyPointModel()
+            result.KeyDatas = new List<KeyPointModel>();
+            result.KeyDatas.AddRange(keyPoints.Select(k => new KeyPointModel()
             {
                 X = k.Point.X,
                 Y = k.Point.Y,
@@ -114,8 +115,8 @@ namespace Xamarin.EmguCV.Wpf.Services.Algorithm
                 GetKeypointDraw(kpsType));
 
             result.ImageArray = ImageHelper.SetImage(resultImage);
-            result.Datas = new List<KeyPointModel>();
-            result.Datas.AddRange(keyPoints.Select(k => new KeyPointModel()
+            result.KeyDatas = new List<KeyPointModel>();
+            result.KeyDatas.AddRange(keyPoints.Select(k => new KeyPointModel()
             {
                 X = k.Point.X,
                 Y = k.Point.Y,

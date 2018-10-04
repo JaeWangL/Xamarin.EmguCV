@@ -87,7 +87,6 @@ namespace Xamarin.EmguCV.Services.Navigation
                 if (mainPage.Detail is CustomNavigationView navigationPage)
                 {
                     var currentPage = navigationPage.CurrentPage;
-
                     if (currentPage.GetType() != page.GetType())
                     {
                         await navigationPage.PushAsync(page);
@@ -118,6 +117,7 @@ namespace Xamarin.EmguCV.Services.Navigation
 
         void CreatePageViewModelMappings()
         {
+            mappings.Add(typeof(CornerHarrisViewModel), typeof(CornerHarrisView));
             mappings.Add(typeof(FeatureDetectionViewModel), typeof(FeatureDetectionView));
             mappings.Add(typeof(HomeViewModel), typeof(HomeView));
             mappings.Add(typeof(MainViewModel), typeof(MainView));

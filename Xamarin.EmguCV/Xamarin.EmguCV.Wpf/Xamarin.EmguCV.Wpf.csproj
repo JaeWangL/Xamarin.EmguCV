@@ -100,6 +100,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Renderers\CustomFrameRenderer.cs" />
+    <Compile Include="Services\Algorithm\CornerHarrisService.cs" />
     <Compile Include="Services\Algorithm\FeatureDetectService.cs" />
     <Compile Include="Services\Picker\PickerService.cs" />
     <Page Include="MainWindow.xaml">

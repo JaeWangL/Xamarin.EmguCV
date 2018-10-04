@@ -20,7 +20,7 @@ namespace Xamarin.EmguCV.ViewModels
         bool isKaze;
         bool isSift;
         bool isSurf;
-        List<KeyPointModel> keyPoints;
+        IEnumerable<KeyPointModel> keyPoints;
         ObservableRangeCollection<AlgorithmModel> algorithms;
 
         public ICommand DetectCommand => new Command(DetectFeature);
@@ -67,7 +67,7 @@ namespace Xamarin.EmguCV.ViewModels
             set => SetProperty(ref isSurf, value);
         }
 
-        public List<KeyPointModel> KeyPoints
+        public IEnumerable<KeyPointModel> KeyPoints
         {
             get => keyPoints;
             set => SetProperty(ref keyPoints, value);
@@ -181,6 +181,7 @@ namespace Xamarin.EmguCV.ViewModels
             {
                 IsBusy = true;
 
+                // TODO: Add 'edit kpsType' features
                 AlgorithmResult result = null;
                 if (IsKaze)
                 {
@@ -213,7 +214,7 @@ namespace Xamarin.EmguCV.ViewModels
                 }
 
                 ResultImage = ImageSource.FromStream(() => new MemoryStream(result.ImageArray));
-                KeyPoints = result.Datas;
+                KeyPoints = result.KeyDatas;
 
                 IsBusy = false;
             }

@@ -8,11 +8,11 @@
              Title=" ">
     <ContentPage.Content>
         <Grid ColumnSpacing="0"
-              RowSpacing="0"
-              Margin="0, 24, 0, 0">
+              RowSpacing="0">
             <ListView CachingStrategy="RecycleElement"
                       SeparatorVisibility="None"
                       HasUnevenRows="True"
+                      Margin="12"
                       ItemsSource="{Binding MenuItems}" 
                       behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding MenuItemSelectedCommand}">
                 <ListView.ItemTemplate>

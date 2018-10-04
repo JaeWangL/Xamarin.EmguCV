@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xamarin.EmguCV.Controls;assembly=Xamarin.EmguCV"
+             x:Class="Xamarin.EmguCV.Views.CornerHarrisView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ImageStyle" 
+                   TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid ColumnSpacing="0"
+                  RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Main Grid-->
+                <Grid Grid.Column="0"
+                      Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="24" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Images -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:CustomFrame Grid.Column="0"
+                                              HasShadow="True">
+                            <Image Source="{Binding FileName}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+
+                        <controls:CustomFrame Grid.Column="1"
+                                              HasShadow="True">
+                            <Image Source="{Binding ResultImage}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+                    </Grid>
+
+                    <!-- Points's Header -->
+                    <!-- Now, ListView's Header and Footer is not working in WPF-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Text="CenterX" />
+                        <Label Grid.Column="1"
+                               Text="CenterY" />
+                        <Label Grid.Column="2"
+                               Text="Radius" />
+                        <Label Grid.Column="3"
+                               Text="Area" />
+                    </Grid>
+
+                    <!-- KeyPoints -->
+                    <Grid Grid.Row="2">
+                        <ListView CachingStrategy="RecycleElement"
+                                  SeparatorVisibility="None"
+                                  HasUnevenRows="True"
+                                  ItemsSource="{Binding CirclePoints}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid ColumnSpacing="0"
+                                              RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding CenterX}" />
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding CenterY}" />
+                                            <Label Grid.Column="2"
+                                                   Text="{Binding Radius}" />
+                                            <Label Grid.Column="3"
+                                                   Text="{Binding Area}" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Text="Pick Image"
+                                Command="{Binding PickCommand}" />
+                        <Button Grid.Column="1"
+                                Text="Detect CornerHarris"
+                                Command="{Binding DetectCommand}" />
+                    </Grid>
+                </Grid>
+
+                <!-- Parameters Grid-->
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource LightGrayColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="Threshold" />
+                    <Entry Grid.Row="1"
+                           Text="{Binding Threshold, Mode=TwoWay}" />
+                    <Label Grid.Row="2"
+                           Text="Block Size" />
+                    <Entry Grid.Row="3"
+                           Text="{Binding BlockSize, Mode=TwoWay}" />
+                    <Label Grid.Row="4"
+                           Text="Aperture Size" />
+                    <Entry Grid.Row="5"
+                           Text="{Binding ApertureSize, Mode=TwoWay}" />
+                    <Label Grid.Row="6"
+                           Text="K" />
+                    <Entry Grid.Row="7"
+                           Text="{Binding K, Mode=TwoWay}" />
+                    <Label Grid.Row="8"
+                           Text="Border Type" />
+                    <Picker Grid.Row="9"
+                            ItemsSource="{Binding Borders}"
+                            SelectedItem="{Binding BorderType}" />
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator Color="{StaticResource AccentColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

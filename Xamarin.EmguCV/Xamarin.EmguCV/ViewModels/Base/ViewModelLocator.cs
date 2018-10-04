@@ -13,8 +13,11 @@ namespace Xamarin.EmguCV.ViewModels.Base
         {
             containerBuilder = new ContainerBuilder();
 
+            // Services
             containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
 
+            // View Models
+            containerBuilder.RegisterType<CornerHarrisViewModel>();
             containerBuilder.RegisterType<FeatureDetectionViewModel>();
             containerBuilder.RegisterType<HomeViewModel>();
             containerBuilder.RegisterType<MainViewModel>();

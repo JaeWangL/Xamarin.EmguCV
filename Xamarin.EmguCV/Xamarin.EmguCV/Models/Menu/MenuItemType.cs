@@ -3,7 +3,7 @@
     public enum MenuItemType
     {
         Home,
-        FeatureDetection,
-        FeatureMatch
+        CornerHarris,
+        FeatureDetection
     }
 }

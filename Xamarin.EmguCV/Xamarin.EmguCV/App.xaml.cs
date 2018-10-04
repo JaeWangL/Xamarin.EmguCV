@@ -2,7 +2,6 @@
 using Xamarin.EmguCV.Services.Navigation;
 using Xamarin.EmguCV.ViewModels.Base;
 using Xamarin.Forms;
-using Xamarin.Forms.DataGrid;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -14,8 +13,6 @@ namespace Xamarin.EmguCV
 
         public App()
         {
-            DataGridComponent.Init();
-
             InitializeComponent();
 
             InitNavigation();
