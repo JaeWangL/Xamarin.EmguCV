@@ -6,9 +6,6 @@ namespace Xamarin.EmguCV.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HomeView : ContentPage
 	{
-		public HomeView()
-		{
-			InitializeComponent();
-		}
-	}
+        public HomeView() => InitializeComponent();
+    }
 }

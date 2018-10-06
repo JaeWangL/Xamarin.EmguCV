@@ -49,6 +49,14 @@ namespace Xamarin.EmguCV.ViewModels
 
             MenuItems.Add(new MenuItemModel
             {
+                MenuItemType = MenuItemType.Disparity,
+                ViewModelType = typeof(DisparityViewModel),
+                Title = "Disparity",
+                IsEnabled = true
+            });
+
+            MenuItems.Add(new MenuItemModel
+            {
                 MenuItemType = MenuItemType.FeatureDetection,
                 ViewModelType = typeof(FeatureDetectionViewModel),
                 Title = "Feature Detection",

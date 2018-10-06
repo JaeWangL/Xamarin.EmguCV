@@ -4,6 +4,7 @@
     {
         Home,
         CornerHarris,
+        Disparity,
         FeatureDetection
     }
 }

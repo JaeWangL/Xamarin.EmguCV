@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Xamarin.EmguCV.Converters;assembly=Xamarin.EmguCV"
              x:Class="Xamarin.EmguCV.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,6 +14,9 @@
             <Color x:Key="WhiteColor">#FFFFFF</Color>
 
             <Color x:Key="AccentColor">#BC4C1B</Color>
+
+            <!-- CONVERTERS -->
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
 
             <!-- FONT SIZES -->
             <OnPlatform x:Key="LittleSize"

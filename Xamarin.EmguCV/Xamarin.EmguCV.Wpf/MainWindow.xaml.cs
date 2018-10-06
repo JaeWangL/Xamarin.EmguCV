@@ -19,6 +19,7 @@ namespace Xamarin.EmguCV.Wpf
             Forms.Forms.Init();
 
             ViewModelLocator.Instance.Register<ICornerHarrisService, CornerHarrisService>();
+            ViewModelLocator.Instance.Register<IDisparityService, DisparityService>();
             ViewModelLocator.Instance.Register<IFeatureDetectService, FeatureDetectService>();
             ViewModelLocator.Instance.Register<IPickerService, PickerService>();
 

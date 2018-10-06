@@ -6,9 +6,6 @@ namespace Xamarin.EmguCV.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CornerHarrisView : ContentPage
     {
-        public CornerHarrisView()
-        {
-            InitializeComponent();
-        }
+        public CornerHarrisView() => InitializeComponent();
     }
 }

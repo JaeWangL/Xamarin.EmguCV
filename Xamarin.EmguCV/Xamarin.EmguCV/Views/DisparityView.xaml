@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xamarin.EmguCV.Controls;assembly=Xamarin.EmguCV"
+             x:Class="Xamarin.EmguCV.Views.DisparityView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ImageStyle" 
+                   TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid ColumnSpacing="0"
+                  RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Main Grid-->
+                <Grid Grid.Column="0"
+                      Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="24" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Picked Images -->
+                    <Grid Grid.Row="0"
+                          IsVisible="{Binding IsDone, Converter={StaticResource InverseBoolConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:CustomFrame Grid.Column="0"
+                                              HasShadow="True">
+                            <Image Source="{Binding FileNameL}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+
+                        <controls:CustomFrame Grid.Column="1"
+                                              HasShadow="True">
+                            <Image Source="{Binding FileNameR}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+                    </Grid>
+
+                    <!-- Result Image -->
+                    <Grid Grid.Row="0"
+                          IsVisible="{Binding IsDone}">
+                        <controls:CustomFrame HasShadow="True">
+                            <Image Source="{Binding ResultImage}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+                    </Grid>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Text="Pick Left Image"
+                                Command="{Binding PickLeftCommand}" />
+                        <Button Grid.Column="1"
+                                Text="Pick Right Image"
+                                Command="{Binding PickRightCommand}" />
+                    </Grid>
+                </Grid>
+
+                <!-- Parameters Grid-->
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource LightGrayColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="24" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="Number Of Disparities" />
+                    <Entry Grid.Row="1"
+                           Text="{Binding NumberOfDisparities, Mode=TwoWay}" />
+                    <Label Grid.Row="2"
+                           Text="Block Size" />
+                    <Entry Grid.Row="3"
+                           Text="{Binding BlockSize, Mode=TwoWay}" />
+                    <Button Grid.Row="5"
+                            Text="Detect Disparity"
+                            Command="{Binding DetectCommand}" />
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator Color="{StaticResource AccentColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -98,7 +98,6 @@ namespace Xamarin.EmguCV.ViewModels
         {
             IsBusy = true;
 
-            // TODO: Add 'edit kpsType' features
             AlgorithmResult result = harrisService.DetectCornerHarris(
                 FileName,
                 Threshold,
