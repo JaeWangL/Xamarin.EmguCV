@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xamarin.EmguCV.Controls;assembly=Xamarin.EmguCV"
+             x:Class="Xamarin.EmguCV.Views.ContourView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ImageStyle" 
+                   TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid ColumnSpacing="0"
+                  RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Main Grid-->
+                <Grid Grid.Column="0"
+                      Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="24" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Images -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:CustomFrame Grid.Column="0"
+                                              HasShadow="True">
+                            <Image Source="{Binding FileName}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+
+                        <controls:CustomFrame Grid.Column="1"
+                                              HasShadow="True">
+                            <Image Source="{Binding ResultImage}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+                    </Grid>
+
+                    <!-- Points's Header -->
+                    <!-- Now, ListView's Header and Footer is not working in WPF-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Text="Count" />
+                        <Label Grid.Column="1"
+                               Text="StartX" />
+                        <Label Grid.Column="2"
+                               Text="StartY" />
+                        <Label Grid.Column="3"
+                               Text="EndX" />
+                        <Label Grid.Column="4"
+                               Text="EndY" />
+                        <Label Grid.Column="5"
+                               Text="Length" />
+                    </Grid>
+
+                    <!-- ContourPoints -->
+                    <Grid Grid.Row="2">
+                        <ListView CachingStrategy="RecycleElement"
+                                  SeparatorVisibility="None"
+                                  HasUnevenRows="True"
+                                  ItemsSource="{Binding ContourPoints}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid ColumnSpacing="0"
+                                              RowSpacing="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding Count}" />
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding StartX}" />
+                                            <Label Grid.Column="2"
+                                                   Text="{Binding StartY}" />
+                                            <Label Grid.Column="3"
+                                                   Text="{Binding EndX}" />
+                                            <Label Grid.Column="4"
+                                                   Text="{Binding EndY}" />
+                                            <Label Grid.Column="5"
+                                                   Text="{Binding Length}" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Text="Pick Image"
+                                Command="{Binding PickCommand}" />
+                        <Button Grid.Column="1"
+                                Text="Detect CornerHarris"
+                                Command="{Binding DetectCommand}" />
+                    </Grid>
+                </Grid>
+
+                <!-- Parameters Grid-->
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource LightGrayColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="Retr Type" />
+                    <Picker Grid.Row="1"
+                            ItemsSource="{Binding Retrs}"
+                            SelectedItem="{Binding RetrType}" />
+                    <Label Grid.Row="2"
+                           Text="Method Type" />
+                    <Picker Grid.Row="3"
+                            ItemsSource="{Binding Methods}"
+                            SelectedItem="{Binding MethodType}" />
+                    <Label Grid.Row="4"
+                           Text="Threshold1" />
+                    <Entry Grid.Row="5"
+                           Text="{Binding Threshold1, Mode=TwoWay}" />
+                    <Label Grid.Row="6"
+                           Text="Threshold2" />
+                    <Entry Grid.Row="7"
+                           Text="{Binding Threshold2, Mode=TwoWay}" />
+                    <Label Grid.Row="8"
+                           Text="ApertureSize" />
+                    <Entry Grid.Row="9"
+                           Text="{Binding ApertureSize, Mode=TwoWay}" />
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator Color="{StaticResource AccentColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,5 +1,22 @@
 ﻿namespace Xamarin.EmguCV.Models.Algorithm
 {
+    public enum ContourMethodType
+    {
+        ChainApproxNone,
+        ChainApproxSimple,
+        ChainApproxTc89L1,
+        ChainApproxTc89Kcos,
+        LinkRuns
+    }
+
+    public enum ContourRetrType
+    {
+        External,
+        List,
+        Ccomp,
+        Tree
+    }
+
     public enum FeatureDetectType
     {
         KAZE,

@@ -17,6 +17,7 @@ namespace Xamarin.EmguCV.ViewModels.Base
             containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
 
             // View Models
+            containerBuilder.RegisterType<ContourViewModel>();
             containerBuilder.RegisterType<CornerHarrisViewModel>();
             containerBuilder.RegisterType<DisparityViewModel>();
             containerBuilder.RegisterType<FeatureDetectionViewModel>();

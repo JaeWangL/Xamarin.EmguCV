@@ -3,6 +3,7 @@
     public enum MenuItemType
     {
         Home,
+        Contours,
         CornerHarris,
         Disparity,
         FeatureDetection

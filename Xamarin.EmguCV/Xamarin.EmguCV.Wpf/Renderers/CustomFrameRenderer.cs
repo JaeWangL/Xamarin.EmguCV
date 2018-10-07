@@ -11,7 +11,7 @@ namespace Xamarin.EmguCV.Wpf.Renderers
 {
     public class CustomFrameRenderer : FrameRenderer
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Frame> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Forms.Frame> e)
         {
             base.OnElementChanged(e);
             

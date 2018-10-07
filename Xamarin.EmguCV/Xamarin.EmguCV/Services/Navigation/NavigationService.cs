@@ -21,10 +21,7 @@ namespace Xamarin.EmguCV.Services.Navigation
             CreatePageViewModelMappings();
         }
 
-        public Task InitializeAsync()
-        {
-            return NavigateToAsync<MainViewModel>();
-        }
+        public Task InitializeAsync() => NavigateToAsync<MainViewModel>();
 
         public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase => InternalNavigateToAsync(typeof(TViewModel), null);
 
@@ -50,7 +47,6 @@ namespace Xamarin.EmguCV.Services.Navigation
         protected Page CreateAndBindPage(Type viewModelType, object parameter)
         {
             var pageType = GetPageTypeForViewModel(viewModelType);
-
             if (pageType == null)
             {
                 throw new Exception($"NavigationService.CreateAndBindPage: Mapping type for {viewModelType} is not a page");
@@ -76,7 +72,6 @@ namespace Xamarin.EmguCV.Services.Navigation
         protected virtual async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
             var page = CreateAndBindPage(viewModelType, parameter);
-
             if (page is MainView)
             {
                 CurrentApplication.MainPage = page;
@@ -117,6 +112,7 @@ namespace Xamarin.EmguCV.Services.Navigation
 
         void CreatePageViewModelMappings()
         {
+            mappings.Add(typeof(ContourViewModel), typeof(ContourView));
             mappings.Add(typeof(CornerHarrisViewModel), typeof(CornerHarrisView));
             mappings.Add(typeof(DisparityViewModel), typeof(DisparityView));
             mappings.Add(typeof(FeatureDetectionViewModel), typeof(FeatureDetectionView));

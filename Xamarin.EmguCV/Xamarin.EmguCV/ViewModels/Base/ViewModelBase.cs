@@ -7,10 +7,7 @@ namespace Xamarin.EmguCV.ViewModels.Base
     {
         protected readonly INavigationService NavigationService;
 
-        public ViewModelBase()
-        {
-            NavigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
-        }
+        public ViewModelBase() => NavigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
 
         public virtual Task InitializeAsync(object navigationData) => Task.FromResult(false);
     }
