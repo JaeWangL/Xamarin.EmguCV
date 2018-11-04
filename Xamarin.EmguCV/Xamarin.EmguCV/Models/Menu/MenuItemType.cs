@@ -6,6 +6,7 @@
         Contours,
         CornerHarris,
         Disparity,
-        FeatureDetection
+        FeatureDetection,
+        FeatureMatch,
     }
 }

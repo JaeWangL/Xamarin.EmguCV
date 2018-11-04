@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Xamarin.EmguCV.Controls;assembly=Xamarin.EmguCV"
+             x:Class="Xamarin.EmguCV.Views.FeatureMatchView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ImageStyle" 
+                   TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFill" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid ColumnSpacing="0"
+                  RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Main Grid-->
+                <Grid Grid.Column="0"
+                      Margin="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="24" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Images -->
+                    <Grid Grid.Row="0"
+                          IsVisible="{Binding IsDone, Converter={StaticResource InverseBoolConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:CustomFrame Grid.Column="0"
+                                              HasShadow="True">
+                            <Image Source="{Binding ModelName}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+
+                        <controls:CustomFrame Grid.Column="1"
+                                              HasShadow="True">
+                            <Image Source="{Binding ObservedName}"
+                                   Style="{StaticResource ImageStyle}" />
+                        </controls:CustomFrame>
+                    </Grid>
+
+                    <!-- Result Image -->
+                    <controls:CustomFrame Grid.Row="0"
+                                          HasShadow="True"
+                                          IsVisible="{Binding IsDone}">
+                        <Image Source="{Binding ResultImage}"
+                               Style="{StaticResource ImageStyle}" />
+                    </controls:CustomFrame>
+
+                    <!-- Buttons for picking images -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Text="Pick Model Image"
+                                Command="{Binding PickModelCommand}" />
+                        <Button Grid.Column="1"
+                                Text="Pick Observed Image"
+                                Command="{Binding PickObservedCommand}" />
+                    </Grid>
+                    
+                    <!-- Match Button -->
+                    <Button Grid.Row="3"
+                            Text="Feature Match"
+                            Command="{Binding MatchCommand}" />
+                </Grid>
+
+                <!-- Parameters Grid-->
+                <Grid Grid.Column="1"
+                      BackgroundColor="{StaticResource LightGrayColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                        <RowDefinition Height="18" />
+                        <RowDefinition Height="26" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="Detect Type" />
+                    <Picker Grid.Row="1"
+                            ItemsSource="{Binding DetectTypes}"
+                            SelectedItem="{Binding DetectType}" />
+                    <Label Grid.Row="2"
+                           Text="Match Type" />
+                    <Picker Grid.Row="3"
+                            ItemsSource="{Binding MatchTypes}"
+                            SelectedItem="{Binding MatchType}" />
+                    <Label Grid.Row="4"
+                           Text="K" />
+                    <Entry Grid.Row="5"
+                           Text="{Binding K, Mode=TwoWay}" />
+                    <Label Grid.Row="6"
+                           Text="Uniqueness Threshold" />
+                    <Entry Grid.Row="7"
+                           Text="{Binding UniquenessThreshold, Mode=TwoWay}" />
+                </Grid>
+            </Grid>
+
+            <ActivityIndicator Color="{StaticResource AccentColor}"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

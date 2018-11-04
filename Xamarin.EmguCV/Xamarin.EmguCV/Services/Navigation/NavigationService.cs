@@ -116,6 +116,7 @@ namespace Xamarin.EmguCV.Services.Navigation
             mappings.Add(typeof(CornerHarrisViewModel), typeof(CornerHarrisView));
             mappings.Add(typeof(DisparityViewModel), typeof(DisparityView));
             mappings.Add(typeof(FeatureDetectionViewModel), typeof(FeatureDetectionView));
+            mappings.Add(typeof(FeatureMatchViewModel), typeof(FeatureMatchView));
             mappings.Add(typeof(HomeViewModel), typeof(HomeView));
             mappings.Add(typeof(MainViewModel), typeof(MainView));
         }

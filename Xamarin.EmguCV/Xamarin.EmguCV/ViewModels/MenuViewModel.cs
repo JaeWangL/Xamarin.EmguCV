@@ -70,6 +70,14 @@ namespace Xamarin.EmguCV.ViewModels
                 Title = "Feature Detection",
                 IsEnabled = true
             });
+
+            MenuItems.Add(new MenuItemModel
+            {
+                MenuItemType = MenuItemType.FeatureMatch,
+                ViewModelType = typeof(FeatureMatchViewModel),
+                Title = "Feature Match",
+                IsEnabled = true
+            });
         }
 
         void OnSelectMenuItem(MenuItemModel item)

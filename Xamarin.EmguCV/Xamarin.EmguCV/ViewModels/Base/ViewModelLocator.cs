@@ -21,6 +21,7 @@ namespace Xamarin.EmguCV.ViewModels.Base
             containerBuilder.RegisterType<CornerHarrisViewModel>();
             containerBuilder.RegisterType<DisparityViewModel>();
             containerBuilder.RegisterType<FeatureDetectionViewModel>();
+            containerBuilder.RegisterType<FeatureMatchViewModel>();
             containerBuilder.RegisterType<HomeViewModel>();
             containerBuilder.RegisterType<MainViewModel>();
             containerBuilder.RegisterType<MenuViewModel>();
